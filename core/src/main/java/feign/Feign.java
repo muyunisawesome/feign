@@ -284,12 +284,15 @@ public abstract class Feign {
           Capability.enrich(this.invocationHandlerFactory, capabilities);
       QueryMapEncoder queryMapEncoder = Capability.enrich(this.queryMapEncoder, capabilities);
 
+      //获取MethodHandler工厂类对象
       SynchronousMethodHandler.Factory synchronousMethodHandlerFactory =
           new SynchronousMethodHandler.Factory(client, retryer, requestInterceptors, logger,
               logLevel, decode404, closeAfterDecode, propagationPolicy, forceDecoding);
+      //构建生成
       ParseHandlersByName handlersByName =
           new ParseHandlersByName(contract, options, encoder, decoder, queryMapEncoder,
               errorDecoder, synchronousMethodHandlerFactory);
+      //Feign的具体实现类
       return new ReflectiveFeign(handlersByName, invocationHandlerFactory, queryMapEncoder);
     }
   }

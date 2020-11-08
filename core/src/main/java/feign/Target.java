@@ -98,7 +98,7 @@ public interface Target<T> {
     @Override
     public Request apply(RequestTemplate input) {
       if (input.url().indexOf("http") != 0) {
-        input.target(url());
+        input.target(url()); //设置baseUrl 到 RequestTemplate
       }
       return input.request();
     }
